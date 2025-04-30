@@ -1,0 +1,55 @@
+# Xcode
+DerivedData/
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+# SwiftPM
+.swiftpm/
+.build/
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+
+# Accio
+Dependencies/
+.accio/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Xcode automatic device support files
+DeviceSupport/
+
+# Archives
+*.xcarchive
+
+# Xcode previews
+*.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+*.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+
+# IDE specific
+.idea/
+*.xcuserstate
+
+# Others
+*.moved-aside
+*.xcuserstate
+*.orig
+*.swp
+.DS_Store
+
