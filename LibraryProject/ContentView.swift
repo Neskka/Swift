@@ -6,81 +6,94 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
+    @AppStorage("isLoggedIn") private var isLoggedIn = false
+    private let context = PersistenceController.shared.container.viewContext
+    
+    init() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = .white
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
+    
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
+            VStack {
+                Spacer()
+                
+                TabView {
+                    BookView()
+                        .tabItem {
+                            Image(systemName: "book.fill")
+                            Text("Strona Główna")
+                        }
+                    
+                    //                    if isLoggedIn {
+                    //                        AccountView()
+                    //                            .tabItem {
+                    //                                Image(systemName: "person.crop.circle.fill")
+                    //                                Text("Moje Konto")
+                    //                            }
+                    //
+                    //                        MenuView()
+                    //                            .tabItem {
+                    //                                Image(systemName: "list.bullet.rectangle.portrait")
+                    //                                Text("Menu")
+                    //                            }
+                    //                    } else {
+                    //                        LoginView()
+                    //                            .tabItem {
+                    //                                Image(systemName: "person.fill")
+                    //                                Text("Logowanie")
+                    //                            }
+                    //
+                    //                        RegisterView()
+                    //                            .tabItem {
+                    //                                Image(systemName: "person.badge.plus.fill")
+                    //                                Text("Rejestracja")
+                    //                            }
+                    //                    }
+                    //                }
+                        .accentColor(.blue)
                 }
-                .onDelete(perform: deleteItems)
+                .background(Color.white)
+                .navigationBarHidden(true)
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            .navigationViewStyle(StackNavigationViewStyle())
+            .environment(\.managedObjectContext, context)
+            .onAppear {
+                preloadSampleBooks(context: context)
             }
         }
     }
+    
+    static var preview: PersistenceController = {
+        let controller = PersistenceController(inMemory: true)
+        let context = controller.container.viewContext
+
+        let book = Book(context: context)
+        book.id = UUID()
+        book.title = "Przykładowa książka"
+        book.author = "Autor Przykładowy"
+        book.category = "Fantasy"
+        book.descriptionText = "Opis próbny"
+        book.price = 19.99
+
+        do {
+            try context.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Nie można zapisać danych do podglądu: \(nsError), \(nsError.userInfo)")
+        }
+
+        return controller
+    }()
+
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    ContentView()
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24E248" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Book" representedClassName="Book" syncable="YES">
+    <entity name="Book" representedClassName=".Book" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String"/>
         <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="cover" optional="YES" attributeType="String"/>
@@ -13,7 +13,7 @@
         <relationship name="toOrder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="toBook" inverseEntity="Order"/>
         <relationship name="toUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="toBook" inverseEntity="User"/>
     </entity>
-    <entity name="Bookstore" representedClassName="Bookstore" syncable="YES">
+    <entity name="Bookstore" representedClassName=".Bookstore" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String"/>
         <attribute name="descriptionText" optional="YES" attributeType="String"/>
         <attribute name="hasApp" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -26,7 +26,7 @@
         <relationship name="toBook" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="toBookstore" inverseEntity="Book"/>
         <relationship name="toOrder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="toBookstore" inverseEntity="Order"/>
     </entity>
-    <entity name="Order" representedClassName="Order" syncable="YES">
+    <entity name="Order" representedClassName=".Order" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="deliveryAddress" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -37,7 +37,7 @@
         <relationship name="toBookstore" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bookstore" inverseName="toOrder" inverseEntity="Bookstore"/>
         <relationship name="toUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="toOrder" inverseEntity="User"/>
     </entity>
-    <entity name="User" representedClassName="User" syncable="YES">
+    <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
