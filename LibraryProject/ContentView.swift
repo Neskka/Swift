@@ -65,23 +65,16 @@ struct ContentView: View {
             .navigationViewStyle(StackNavigationViewStyle())
             .environment(\.managedObjectContext, context)
             .onAppear {
+                resetAllBooks(context: context)
                 preloadSampleBooks(context: context)
             }
+
         }
     }
     
     static var preview: PersistenceController = {
         let controller = PersistenceController(inMemory: true)
         let context = controller.container.viewContext
-
-        let book = Book(context: context)
-        book.id = UUID()
-        book.title = "Przykładowa książka"
-        book.author = "Autor Przykładowy"
-        book.category = "Fantasy"
-        book.descriptionText = "Opis próbny"
-        book.price = 19.99
-
         do {
             try context.save()
         } catch {

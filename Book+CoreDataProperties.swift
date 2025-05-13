@@ -21,4 +21,5 @@ extension Book {
     @NSManaged public var cover: String?
     @NSManaged public var descriptionText: String?
     @NSManaged public var price: Double
+    @NSManaged public var isbn: String?
 }
