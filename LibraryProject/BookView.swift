@@ -18,7 +18,7 @@ struct BookView: View {
     @State private var searchText = ""
     @State private var selectedGenre: String = "Wszystko"
     
-    let genres = ["Wszystko", "Fantasy", "Thriller", "Sci-Fi", "Romance", "Literatura piękna", "Dystopia", "Powieść historyczna", "Przygodowa", "Reportaż", "Powieść psychologiczna"]
+    let genres = ["Wszystko", "Fantasy", "Thriller", "Sci-Fi", "Romans", "Literatura piękna", "Dystopia", "Powieść historyczna", "Przygodowa", "Reportaż", "Powieść psychologiczna"]
     
     var filteredBooks: [Book] {
         books.filter { book in
