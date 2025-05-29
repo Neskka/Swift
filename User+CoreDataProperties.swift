@@ -22,8 +22,8 @@ extension User {
     @NSManaged public var lastName: String?
     @NSManaged public var password: String?
     @NSManaged public var phoneNumber: Int64
-    @NSManaged public var toBook: Book?
-    @NSManaged public var toOrder: Order?
+    @NSManaged public var toBook: NSSet?
+    @NSManaged public var orders: Set<Order>?
 
 }
 

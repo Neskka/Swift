@@ -22,7 +22,7 @@ extension Order {
     @NSManaged public var paymentMethod: String?
     @NSManaged public var status: String?
     @NSManaged public var sum: Double
-    @NSManaged public var toBook: Book?
+    @NSManaged public var books: Set<Book>?
     @NSManaged public var toBookstore: Bookstore?
     @NSManaged public var toUser: User?
 

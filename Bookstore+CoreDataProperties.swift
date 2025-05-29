@@ -25,8 +25,9 @@ extension Bookstore {
     @NSManaged public var name: String?
     @NSManaged public var phoneNumber: Int64
     @NSManaged public var rating: Double
-    @NSManaged public var toBook: Book?
-    @NSManaged public var toOrder: Order?
+    @NSManaged public var books: Set<Book>?
+    @NSManaged public var orders: Set<Order>?
+
 
 }
 

@@ -22,4 +22,12 @@ extension Book {
     @NSManaged public var descriptionText: String?
     @NSManaged public var price: Double
     @NSManaged public var isbn: String?
+    @NSManaged public var releaseDate: Date?
+    @NSManaged public var publisher: String?
+    @NSManaged public var pageCount: Int64
+    @NSManaged public var rating: Double
+    @NSManaged public var order: Int64
+    @NSManaged public var readingTime: String?
+    @NSManaged public var toUser: Set<User>?
+    @NSManaged public var toBookstore: NSSet?
 }

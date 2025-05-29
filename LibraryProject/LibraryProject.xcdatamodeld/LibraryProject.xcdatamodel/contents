@@ -7,11 +7,17 @@
         <attribute name="descriptionText" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isbn" optional="YES" attributeType="String"/>
+        <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="pageCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="publisher" optional="YES" attributeType="String"/>
+        <attribute name="rating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="readingTime" optional="YES" attributeType="String"/>
+        <attribute name="releaseDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="toBookstore" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bookstore" inverseName="toBook" inverseEntity="Bookstore"/>
+        <relationship name="toBookstore" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bookstore" inverseName="toBook" inverseEntity="Bookstore"/>
         <relationship name="toOrder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="toBook" inverseEntity="Order"/>
-        <relationship name="toUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="toBook" inverseEntity="User"/>
+        <relationship name="toUser" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="toBook" inverseEntity="User"/>
     </entity>
     <entity name="Bookstore" representedClassName=".Bookstore" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String"/>
@@ -23,7 +29,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="phoneNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="rating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="toBook" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="toBookstore" inverseEntity="Book"/>
+        <relationship name="toBook" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="toBookstore" inverseEntity="Book"/>
         <relationship name="toOrder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="toBookstore" inverseEntity="Order"/>
     </entity>
     <entity name="Order" representedClassName=".Order" syncable="YES">
@@ -44,7 +50,7 @@
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="password" optional="YES" attributeType="String"/>
         <attribute name="phoneNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="toBook" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="toUser" inverseEntity="Book"/>
+        <relationship name="toBook" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="toUser" inverseEntity="Book"/>
         <relationship name="toOrder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="toUser" inverseEntity="Order"/>
     </entity>
 </model>
